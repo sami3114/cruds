@@ -8,7 +8,7 @@
             {{ session('status') }}
         </div>
     @endif
-    <form method="POST" action="{{route('student.update',['id'=>$student->id])}}" enctype="multipart/form-data">
+    <form method="POST" action="{{route('student.update',$student->id)}}" enctype="multipart/form-data">
         @csrf
         @method('put')
         <div class="mb-3 row">
@@ -26,7 +26,7 @@
         <div class="mb-3 row">
             <label for="pwd" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
-                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
             </div>
         </div>
         <div class="mb-3 row">
@@ -38,7 +38,7 @@
         <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Class</label>
             <div class="col-sm-10">
-                <select class="form-select" name="sclass">--}}
+                <select class="form-select" name="school_class_id">--}}
                     @foreach($sclasses as $sclass)
                         <option value="{{$sclass->id}}" {{$sclass->id===$student->school_class->id ? 'selected' : ''}}>{{$sclass->name}}</option>
                     @endforeach
@@ -72,7 +72,7 @@
         <div class="mb-3 row">
             <label for="staticEmail" class="col-sm-2 col-form-label">Student Image</label>
             <div class="col-sm-10">
-                <input type="file" class="form-control" id="subject" name="image">
+                <input value="{{$student->photo}}" type="file" class="form-control" id="subject" name="photo">
                 <div class="form-group pt-2">
                     <img src="{{ Storage::url($student->photo) }}" height="200" width="200" alt="" />
                 </div>

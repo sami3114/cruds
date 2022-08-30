@@ -2,7 +2,7 @@
 @section('content')
 <div class="container mt-3 pt-5">
     <h2>Add Class</h2>
-    <form method="POST" action="{{route('class.store')}}">
+    <form method="POST" action="{{route('schoolClass.store')}}">
         @csrf
         <div class="mb-3 mt-3">
             <label for="subject" class="form-label">Class:</label>

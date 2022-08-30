@@ -20,8 +20,13 @@
             <td>{{$subject->subject_name}}</td>
             <td>{{$subject->school_class->name}}</td>
             <td>
-                <a href="{{route('subject.edit',['id'=>$subject->id])}}" class="btn btn-sm btn-info">Edit</a>
-                <a href="{{route('subject.del',['id'=>$subject->id])}}" class="btn btn-sm btn-danger">Delete</a>
+                <form action="{{ route('subject.destroy',['subject'=>$subject->id]) }}" method="POST">
+                    <a href="{{route('subject.edit',['subject'=>$subject->id])}}" class="btn btn-sm btn-info">Edit</a>
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
             </td>
         </tr>
         @endforeach

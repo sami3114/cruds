@@ -42,28 +42,21 @@ class StudentController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
-            'pwd' => 'required',
-            'phone' => 'required',
-            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'email' => 'required|unique:students',
+            'password' => 'required',
+            'phone' => 'required|unique:students',
+            'photo' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
+        $data=$request->all();
 
+        $pwd=Hash::make($request->password);
+        $path = $request->file('photo')->store('public/images');
+        $data['photo']=$path;
+        $data['password']=$pwd;
         $student=new Student();
-        $student->name=$request->name;
-        $student->email=$request->email;
-        $pwd=Hash::make($request->pwd);
-        $student->password=$pwd;
-        $student->phone=$request->phone;
-        $student->school_class_id=$request->sclass;
-        $student->gender=$request->gender;
-        $student->birthday=$request->birthday;
-        $student->address=$request->address;
-        $path = $request->file('image')->store('public/images');
-        $student->photo=$path;
+        $student->create($data);
 
-        $student->save();
-
-        return redirect()->route('student')->with('success','Post has been created successfully.');
+        return redirect()->route('student.index')->with('success','Post has been created successfully.');
     }
 
     /**
@@ -83,9 +76,9 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Student $student)
     {
-        $student=Student::where('id',$id)->first();
+//        $student=Student::where('id',$id)->first();
         $sclasses=SchoolClass::all();
         return view('student.edit',compact('student','sclasses'));
     }
@@ -97,28 +90,23 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Student $student)
     {
-        $student=Student::findOrFail($id);
-        $student->name=$request->name;
-        $student->email=$request->email;
-        $student->password=$request->pwd;
-        $student->phone=$request->phone;
-        $student->school_class_id=$request->sclass;
-        $student->gender=$request->gender;
-        $student->birthday=$request->birthday;
-        $student->address=$request->address;
-
-        if($request->hasFile('image')){
+        $data=$request->all();
+        if($request->hasFile('photo')){
             $request->validate([
-                'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+                'photo' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             ]);
-            $path = $request->file('image')->store('public/images');
-            $student->photo=$path;
-        }
-        $student->save();
 
-        return redirect()->route('student')->with('success','Student has been updated successfully.');
+                $path = $request->file('photo')->store('public/images');
+            $data['photo']=$path;
+          }
+        $pwd=Hash::make($request->password);
+        $data['password']=$pwd;
+
+//        dd($data);
+        $student->update($data);
+        return redirect()->route('student.index')->with('success','Student has been updated successfully.');
     }
 
     /**
@@ -127,10 +115,9 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Student $student)
     {
-        $student=Student::findOrFail($id);
         $student->delete();
-        return redirect()->route('student');
+        return redirect()->route('student.index');
     }
 }

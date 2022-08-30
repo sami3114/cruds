@@ -14,8 +14,8 @@ class SchoolClassController extends Controller
      */
     public function index()
     {
-        $sclasses=SchoolClass::all();
-        return view('sclass.index',compact('sclasses'));
+        $schoolClasses=SchoolClass::all();
+        return view('sclass.index',compact('schoolClasses'));
     }
 
     /**
@@ -37,10 +37,8 @@ class SchoolClassController extends Controller
     public function store(Request $request)
     {
         $request->validate(['name' => 'required']);
-        $sclass=new SchoolClass();
-        $sclass->name=$request->name;
-        $sclass->save();
-        return redirect('/sclass');
+        SchoolClass::create($request->all());
+        return redirect()->route('schoolClass.index');
     }
 
     /**
@@ -60,10 +58,9 @@ class SchoolClassController extends Controller
      * @param  \App\Models\SchoolClass  $schoolClass
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(SchoolClass $schoolClass)
     {
-        $sclass=SchoolClass::where('id',$id)->first();
-        return view('sclass.edit',compact('sclass'));
+        return view('sclass.edit',compact('schoolClass'));
     }
 
     /**
@@ -73,13 +70,11 @@ class SchoolClassController extends Controller
      * @param  \App\Models\SchoolClass  $schoolClass
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, SchoolClass $schoolClass)
     {
         $request->validate(['name' => 'required']);
-        $sclass=SchoolClass::where('id',$id)->first();
-        $sclass->name=$request->name;
-        $sclass->save();
-        return redirect('/sclass');
+        $schoolClass->update($request->all());
+        return redirect()->route('schoolClass.index');
     }
 
     /**
@@ -88,10 +83,9 @@ class SchoolClassController extends Controller
      * @param  \App\Models\SchoolClass  $schoolClass
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(SchoolClass $schoolClass)
     {
-        $sclass=SchoolClass::where('id',$id)->first();
-        $sclass->delete();
-        return redirect('/sclass');
+        $schoolClass->delete();
+        return redirect()->route('schoolClass.index');
     }
 }

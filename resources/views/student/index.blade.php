@@ -1,7 +1,6 @@
 @extends('layout.main')
 @section('content')
 <div class="container mt-3 pt-5">
-{{--    <h2>Subjects <a class="btn btn-info" href="/subject-create">New Subject</a></h2>--}}
     <h2>Student <a class="btn btn-info" href="{{route('student.create')}}">New Student</a></h2>
     <table class="table">
         <thead>
@@ -30,10 +29,14 @@
             <th>{{$student->birthday}}</th>
             <th>{{$student->address}}</th>
             <th><img src="{{ Storage::url($student->photo) }}" height="75" width="75" alt="" /></th>
-{{--            <th><img src="{{asset('/images/'.$student->photo)}}" width="100px"></th>--}}
             <td>
-                <a href="{{route('student.edit',['id'=>$student->id])}}" class="btn btn-sm btn-info">Edit</a>
-                <a href="{{route('student.del',['id'=>$student->id])}}" class="btn btn-sm btn-danger">Delete</a>
+                <form action="{{ route('student.destroy',['student'=>$student->id]) }}" method="POST">
+                    <a href="{{route('student.edit',['student'=>$student->id])}}" class="btn btn-sm btn-info">Edit</a>
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
             </td>
         </tr>
         @endforeach

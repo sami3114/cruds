@@ -1,7 +1,7 @@
 @extends('layout.main')
 @section('content')
 <div class="container mt-3 pt-5">
-    <h2>Class <a class="btn btn-info" href="{{route('class.create')}}">New Class</a></h2>
+    <h2>Class <a class="btn btn-info" href="{{route('schoolClass.create')}}">New Class</a></h2>
     <table class="table">
         <thead>
         <tr>
@@ -11,13 +11,17 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($sclasses as $sclass)
+        @foreach($schoolClasses as $schoolClass)
         <tr>
             <td>{{$loop->index+1}}</td>
-            <td>{{$sclass->name}}</td>
+            <td>{{$schoolClass->name}}</td>
             <td>
-                <a href="{{route('class.edit',['id'=>$sclass->id])}}" class="btn btn-sm btn-info">Edit</a>
-                <a href="{{route('class.del',['id'=>$sclass->id])}}" class="btn btn-sm btn-danger">Delete</a>
+            <form action="{{ route('schoolClass.destroy',['schoolClass'=>$schoolClass->id]) }}" method="POST">
+                <a href="{{route('schoolClass.edit',['schoolClass'=>$schoolClass->id])}}" class="btn btn-sm btn-info">Edit</a>
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
             </td>
         </tr>
         @endforeach

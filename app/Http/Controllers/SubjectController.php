@@ -39,12 +39,9 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['name' => 'required']);
-        $subject=new Subject();
-        $subject->subject_name=$request->name;
-        $subject->school_classes_id=$request->sclass;
-        $subject->save();
-        return redirect('/');
+        $request->validate(['subject_name' => 'required']);
+        Subject::create($request->all());
+        return redirect()->route('subject.index');
 
     }
 
@@ -65,9 +62,8 @@ class SubjectController extends Controller
      * @param  \App\Models\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Subject $subject)
     {
-        $subject=Subject::where('id',$id)->first();
         $sclasses=SchoolClass::all();
         return view('subject.edit',compact('subject','sclasses'));
     }
@@ -79,13 +75,11 @@ class SubjectController extends Controller
      * @param  \App\Models\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Subject $subject)
     {
-        $request->validate(['name' => 'required']);
-        $subject=Subject::where('id',$id)->first();
-        $subject->subject_name=$request->name;
-        $subject->save();
-        return redirect('/');
+        $request->validate(['subject_name' => 'required']);
+        $subject->update($request->all());
+        return redirect()->route('subject.index');
     }
 
     /**
@@ -94,10 +88,9 @@ class SubjectController extends Controller
      * @param  \App\Models\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Subject $subject)
     {
-        $subject=Subject::where('id',$id)->first();
         $subject->delete();
-        return redirect('/');
+        return redirect()->route('subject.index');
     }
 }

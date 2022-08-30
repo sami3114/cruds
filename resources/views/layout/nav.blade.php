@@ -7,13 +7,13 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{route('sclass')}}">Class</a>
+                    <a class="nav-link active" aria-current="page" href="{{route('schoolClass.index')}}">Class</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('subject')}}">Subjects</a>
+                    <a class="nav-link" href="{{route('subject.index')}}">Subjects</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('student')}}">Students</a>
+                    <a class="nav-link" href="{{route('student.index')}}">Students</a>
                 </li>
             </ul>
         </div>

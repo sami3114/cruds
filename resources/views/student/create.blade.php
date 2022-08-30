@@ -30,7 +30,7 @@
         <div class="mb-3 row">
             <label for="pwd" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
-                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
                 @error('pwd')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
@@ -48,7 +48,7 @@
         <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Class</label>
             <div class="col-sm-10">
-                <select class="form-select" name="sclass">--}}
+                <select class="form-select" name="school_class_id">--}}
                     @foreach($sclasses as $sclass)
                         <option value="{{$sclass->id}}">{{$sclass->name}}</option>
                     @endforeach
@@ -81,8 +81,8 @@
         <div class="mb-3 row">
             <label for="staticEmail" class="col-sm-2 col-form-label">Student Image</label>
             <div class="col-sm-10">
-                <input type="file" class="form-control" id="subject" name="image">
-                @error('image')
+                <input type="file" class="form-control" id="subject" name="photo">
+                @error('photo')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
             </div>
