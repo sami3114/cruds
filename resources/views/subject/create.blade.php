@@ -7,7 +7,7 @@
         <div class="mb-3 mt-3">
             <label for="subject" class="form-label">Subject:</label>
             <input type="text" class="form-control" id="subject" placeholder="Enter class name" name="subject_name">
-            @error('name')
+            @error('subject_name')
             <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
             @enderror
         </div>

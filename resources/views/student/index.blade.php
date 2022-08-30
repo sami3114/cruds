@@ -1,8 +1,8 @@
 @extends('layout.main')
 @section('content')
-<div class="container mt-3 pt-5">
+<div class="container-fluid mt-3 pt-5">
     <h2>Student <a class="btn btn-info" href="{{route('student.create')}}">New Student</a></h2>
-    <table class="table">
+    <table id="myTable" class="table">
         <thead>
         <tr>
             <th>Id</th>

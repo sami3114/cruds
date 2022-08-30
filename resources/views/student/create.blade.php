@@ -12,7 +12,7 @@
         <div class="mb-3 row">
             <label for="name" class="col-sm-2 col-form-label">Name</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+                <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" value="{{ old('name') }}">
                 @error('name')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
@@ -21,7 +21,7 @@
         <div class="mb-3 row">
             <label for="email" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
-                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" value="{{ old('email') }}">
                 @error('email')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
@@ -30,7 +30,7 @@
         <div class="mb-3 row">
             <label for="pwd" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
-                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
+                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" value="{{ old('password') }}">
                 @error('pwd')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
@@ -39,7 +39,7 @@
         <div class="mb-3 row">
             <label for="phone" class="col-sm-2 col-form-label">Phone No:</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" id="phone" placeholder="Enter phone number" name="phone">
+                <input type="number" class="form-control" id="phone" placeholder="Enter phone number" name="phone" value="{{ old('phone') }}">
                 @error('phone')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
@@ -68,13 +68,13 @@
         <div class="mb-3 row">
             <label for="staticEmail" class="col-sm-2 col-form-label">Birthday</label>
             <div class="col-sm-10">
-                <input type="date" class="form-control" id="subject" name="birthday">
+                <input type="date" class="form-control" id="subject" name="birthday" value="{{ old('birthday')}}">
             </div>
         </div>
         <div class="mb-3 row">
             <label for="staticEmail" class="col-sm-2 col-form-label">Address</label>
             <div class="col-sm-10">
-                <textarea class="form-control" rows="5" id="address" name="address"></textarea>
+                <textarea class="form-control" rows="5" id="address" name="address">{{old('address')}}</textarea>
             </div>
         </div>
 

@@ -2,7 +2,7 @@
 @section('content')
 <div class="container mt-3 pt-5">
     <h2>Class <a class="btn btn-info" href="{{route('schoolClass.create')}}">New Class</a></h2>
-    <table class="table">
+    <table id="myTable" class="table">
         <thead>
         <tr>
             <th>Id</th>
